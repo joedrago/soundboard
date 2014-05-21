@@ -1,0 +1,337 @@
+<html manifest="cache.manifest">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<script src="js/jquery-1.11.0.min.js"></script>
+<style>
+
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow: visible;
+    background-color: #000;
+    white-space: nowrap;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+#tabs {
+    display: inline-block;
+    background-color: #000000;
+    width: 19%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#content {
+    display: inline-block;
+    background-color: #000000;
+    width: 80%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+
+    position: absolute;
+    left: 20%;
+    top: 0px;
+}
+
+.tab {
+    display: inline-block;
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    color: #ffffff;
+
+    border: 1px dashed black;
+
+    font-size: 30px;
+    font-variant:small-caps;
+    text-shadow: 2px 2px #000000;
+}
+
+.box {
+    display: inline-block;
+    width: 25%;
+    height: 25%;
+    text-align: center;
+
+    border: 1px dashed black;
+
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    color: #ffffff;
+
+    font-size: 25px;
+    font-variant:small-caps;
+    text-shadow: 2px 2px #000000;
+}
+
+.centerme {
+    padding-top: 37%;
+}
+
+</style>
+<body>
+<div><span id="tabs">
+</span><span id="content"></span>
+</div>
+<script>
+
+var panels = {
+    "basics": {
+        name: "basics",
+        text: "Basics",
+        colors: ["#008b92", "#005a5f", "#1b6a6d"],
+        sounds: [
+            { src: "absolutely", text: "Absolutely!" },
+            { src: "yes", text: "Yes" },
+            { src: "no", text: "No" },
+            { src: "hellno", text: "Hell no!" },
+
+            { newline: true },
+
+            { src: "hello", text: "Hello" },
+            { src: "goodbye", text: "Goodbye" },
+            { src: "please", text: "Please" },
+            { src: "thankyou", text: "Thank You" },
+
+            { newline: true },
+
+            { src: "more", text: "More" },
+            { src: "dontcare", text: "I Don't Care" },
+            { src: "doesntmatter", text: "Doesn't Matter" },
+            { src: "gimmefive", text: "Gimme 5 Minutes" },
+
+            { newline: true },
+
+            { src: "stop", text: "Stop" },
+            { src: "ouch", text: "Ouch" },
+            { src: "iminpain", text: "I'm in pain" },
+            { src: "brb", text: "Be Right Back" },
+        ]
+    },
+
+    "functions": {
+        name: "functions",
+        text: "Functions",
+        colors: ["#500078", "#34004f", "#43165b"],
+        sounds: [
+
+            { src: "imhungry", text: "I'm Hungry" },
+            { src: "checkblood", text: "Check Blood Sugar" },
+            { src: "imhot", text: "I'm Hot" },
+            { src: "imcold", text: "I'm Cold" },
+
+            { newline: true },
+
+            { src: "moveme", text: "Move Me" },
+            { src: "adjustme", text: "Adjust Me" },
+            { src: "legs", text: "Legs" },
+            { src: "readyforbed", text: "Ready For Bed" },
+
+            { newline: true },
+
+            { src: "alldone", text: "All Done" },
+            { src: "dontwant", text: "I Don't Want To" },
+            { src: "needtogo", text: "I Need To Go" },
+
+            { newline: true },
+
+            { src: "please", text: "Please" },
+            { src: "TVon", text: "TV On" },
+            { src: "TVoff", text: "TV Off" },
+        ]
+    },
+
+    "questions": {
+        name: "questions",
+        text: "!?",
+        colors: ["#b1b400", "#747600", "#868721"],
+        sounds: [
+            { src: "yessss", text: "Yesss!" },
+            { src: "ohyesss", text: "Ohhh Yes!" },
+            { src: "laugh", text: "Hahaha" },
+            { src: "comeon", text: "Come on!" },
+
+            { newline: true },
+
+            { src: "effyou", text: "Fuuuuuck youuu!" },
+            { src: "blowme", text: "Blow me." },
+            { src: "bum", text: "He's a bum!" },
+            { src: "kiddinme", text: "Kidding me!" },
+
+            { newline: true },
+
+            { src: "howswork", text: "How's work?" },
+            { src: "howarethings", text: "How are things?" },
+            { src: "howisfamily", text: "How's the family?" },
+            { src: "supwithjets", text: "Sup with the Jets?" },
+
+            { newline: true },
+
+            { src: "wherestony", text: "Where's Tony?" },
+            { src: "wheresmary", text: "Where's Mary?" },
+            { src: "howsschool", text: "How was school?" },
+        ]
+    },
+
+    "snacks": {
+        name: "snacks",
+        text: "Snacks",
+        colors: ["#b45300", "#885121", "#763700"],
+        sounds: [
+            { src: "shake", text: "Shake" },
+            { src: "oatmeal", text: "Oatmeal" },
+            { src: "coffee", text: "Coffee" },
+
+            { newline: true },
+
+            { src: "avocado", text: "Avocado" },
+            { src: "eggs", text: "Eggs" },
+            { src: "crackers", text: "Crackers" },
+
+            { newline: true },
+
+            { src: "peppermints", text: "Peppermints" },
+            { src: "licorice", text: "Licorice" },
+
+            { newline: true },
+
+            { src: "please", text: "Please" },
+        ]
+    }
+};
+
+
+var gSounds = {};
+var gCurrentSound = null;
+
+function play(which)
+{
+    stop();
+
+    gCurrentSound = gSounds[which];
+    if(gCurrentSound !== null)
+    {
+        gCurrentSound.play();
+    }
+}
+
+function stop()
+{
+    if(gCurrentSound)
+    {
+        if(!gCurrentSound.paused)
+        {
+            gCurrentSound.pause();
+            gCurrentSound.currentTime = 0;
+        }
+        gCurrentSound = null;
+    }
+}
+
+function addBox(info, color)
+{
+    var name = info.text.replace("\n", "<br>");
+    return "<span class=\"box\" style=\"background-color: "+color+"\" onmousedown=\"play('"+info.src+"')\"><div class=\"centerme\">"+name+"</div></span>";
+}
+
+function addTab(info)
+{
+    var fixedText = info.text.replace("\n", "<br>");
+    return "<span class=\"tab\" style=\"background-color: "+info.colors[0]+"\" onmousedown=\"gotoPanel('"+info.name+"')\"><div class=\"centerme\">"+fixedText+"</div></span><br>";
+}
+
+function gotoPanel(panelName)
+{
+    console.log("gotoPanel: "+panelName);
+
+    var t = "";
+    var panel = panels[panelName];
+    var row = 0;
+    var col = 0;
+    for(var i = 0; i < panel.sounds.length; i++)
+    {
+        if(panel.sounds[i].hasOwnProperty("newline"))
+        {
+            t += "<br>";
+            row++;
+            col = 0;
+        }
+        else
+        {
+            var colorIndex = 1 + (((col % 2) + (row % 2)) % 2);
+            t += addBox(panel.sounds[i], panel.colors[colorIndex]);
+            col++;
+        }
+    }
+    $("#content").html(t);
+}
+
+function preloadSound(src)
+{
+    if(!gSounds.hasOwnProperty(src))
+    {
+        gSounds[src] = new Audio("samples/" + src + ".wav");
+        if(gSounds[src])
+        {
+            console.log("preloaded sound: "+src);
+        }
+    }
+}
+
+function main()
+{
+    $('html, body').on('touchmove', function(e){ 
+        //prevent native touch activity like scrolling
+        e.preventDefault(); 
+    });
+
+    var tabs = "";
+    var panelNames = Object.keys(panels);
+    for(var panelIndex = 0; panelIndex < panelNames.length; panelIndex++)
+    {
+        var panelName = panelNames[panelIndex];
+        var panel = panels[panelName];
+        tabs += addTab(panel);
+
+        for(var i = 0; i < panel.sounds.length; i++)
+        {
+            if(!panel.sounds[i].hasOwnProperty("newline"))
+            {
+                preloadSound(panel.sounds[i].src);
+            }
+        }
+    }
+
+    $("#tabs").html(tabs);
+    gotoPanel("basics");
+}
+
+$(function() {
+    main();
+});
+
+</script>
+</body>
+</html>
